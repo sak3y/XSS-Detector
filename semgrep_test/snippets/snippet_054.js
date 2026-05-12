@@ -1,0 +1,1 @@
+function uw3(){const name=location.hash.slice(1);document.querySelector('#welcome').innerText='Hello '+name;}

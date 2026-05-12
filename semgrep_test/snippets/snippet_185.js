@@ -1,0 +1,1 @@
+function renderUsername(){var n=location.href.split('user=').pop().split('&')[0];document.getElementById('name').innerHTML=n;}

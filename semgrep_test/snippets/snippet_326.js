@@ -1,0 +1,1 @@
+function pm4(){window.addEventListener('message',e=>{if(e.origin!=='https://trusted.example.com')return;document.querySelector('#out').textContent=e.data;});}

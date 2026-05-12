@@ -1,0 +1,1 @@
+function img2(){const p=new URLSearchParams(location.search);document.querySelector('#photo').outerHTML='<img src="'+p.get('url')+'" onerror="alert(1)">';}

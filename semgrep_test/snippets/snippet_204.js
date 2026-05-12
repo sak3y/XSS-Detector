@@ -1,0 +1,1 @@
+function qp_a(){const p=new URLSearchParams(location.search);document.write('<p>'+p.get('msg')+'</p>');}

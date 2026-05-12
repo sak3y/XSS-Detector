@@ -1,0 +1,67 @@
+rules:
+  - id: dom-xss-innerhtml-from-url
+    message: User input from URL flows into innerHTML/outerHTML — DOM XSS risk.
+    severity: ERROR
+    languages: [javascript]
+    pattern-either:
+      - pattern: $X.innerHTML = $Y
+      - pattern: $X.outerHTML = $Y
+      - pattern: $X.innerHTML += $Y
+    pattern-not-inside:
+      - pattern: $X.innerHTML = "..."
+      - pattern: $X.innerHTML = '...'
+
+  - id: dom-xss-document-write
+    message: document.write with potentially user-controlled data.
+    severity: ERROR
+    languages: [javascript]
+    pattern-either:
+      - pattern: document.write(...)
+      - pattern: document.writeln(...)
+
+  - id: dom-xss-insertadjacenthtml
+    message: insertAdjacentHTML with potentially user-controlled data.
+    severity: ERROR
+    languages: [javascript]
+    pattern: $X.insertAdjacentHTML($POS, $Y)
+
+  - id: dom-xss-eval
+    message: eval() with dynamic input.
+    severity: ERROR
+    languages: [javascript]
+    pattern: eval(...)
+
+  - id: dom-xss-function-constructor
+    message: Function() constructor with dynamic input.
+    severity: ERROR
+    languages: [javascript]
+    pattern: new Function(...)
+
+  - id: dom-xss-settimeout-string
+    message: setTimeout with string argument may execute attacker-controlled code.
+    severity: WARNING
+    languages: [javascript]
+    pattern-either:
+      - pattern: setTimeout($X, ...)
+      - pattern: setInterval($X, ...)
+
+  - id: dom-xss-iframe-srcdoc
+    message: iframe.srcdoc set from variable - XSS risk if user-controlled.
+    severity: ERROR
+    languages: [javascript]
+    pattern: $X.srcdoc = $Y
+
+  - id: dom-xss-jquery-html
+    message: jQuery .html() with dynamic input.
+    severity: ERROR
+    languages: [javascript]
+    pattern: $X.html($Y)
+    pattern-not:
+      - pattern: $X.html("...")
+      - pattern: $X.html('...')
+
+  - id: dom-xss-react-dangerously
+    message: React dangerouslySetInnerHTML — verify content is sanitised.
+    severity: WARNING
+    languages: [javascript]
+    pattern: dangerouslySetInnerHTML={...}

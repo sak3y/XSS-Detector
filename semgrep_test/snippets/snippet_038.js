@@ -1,0 +1,1 @@
+function fp4(){const i=document.querySelector('#name');document.querySelector('.preview').innerHTML=i.value;}

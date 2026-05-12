@@ -1,0 +1,1 @@
+function hv5(){const q=location.search.split('=')[1];document.querySelector('h1').innerHTML='Results for: '+q;}

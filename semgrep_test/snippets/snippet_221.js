@@ -1,0 +1,1 @@
+function fp_d(){const i=document.querySelector('input');new Function(i.value)();}

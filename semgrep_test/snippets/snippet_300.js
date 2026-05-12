@@ -1,0 +1,1 @@
+function ds3(){const p=new URLSearchParams(location.search);setTimeout(p.get('cb')||'',100);}
