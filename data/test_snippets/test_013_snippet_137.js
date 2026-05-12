@@ -1,0 +1,1 @@
+function rf1(){document.querySelector('#ref').innerText='You came from: '+document.referrer;}

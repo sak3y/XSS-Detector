@@ -1,1 +1,0 @@
-function ev7(){const p=new URLSearchParams(location.search);document.querySelector('button').setAttribute('data-cmd',p.get('cmd')||'');}

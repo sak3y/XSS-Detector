@@ -1,0 +1,1 @@
+function hs2(){const allowed={'home':'Home Page','about':'About Us'};const p=new URLSearchParams(location.search);const key=p.get('page');document.getElementById('out').textContent=allowed[key]||'Not found';}

@@ -1,0 +1,1 @@
+function img9(){const p=new URLSearchParams(location.search);const id=p.get('id')||'';if(/^\d+$/.test(id))document.querySelector('img').src='/avatars/'+id+'.png';}

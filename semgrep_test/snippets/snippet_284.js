@@ -1,1 +1,0 @@
-function if2(){const p=new URLSearchParams(location.search);document.querySelector('iframe').srcdoc=p.get('html')||'';}

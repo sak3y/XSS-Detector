@@ -1,1 +1,0 @@
-function hs8(props){const name=document.createTextNode(props.name||'');document.querySelector('#card').appendChild(name);}

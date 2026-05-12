@@ -1,1 +1,0 @@
-function uw5(){const input=document.querySelector('#username');document.querySelector('#welcome').innerText='Hi '+input.value;}

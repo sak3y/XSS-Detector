@@ -1,1 +1,0 @@
-function dl8(){const p=new URLSearchParams(location.search);const raw=p.get('next')||'/';const safe=raw.toLowerCase().startsWith('javascript:')?'/':raw;document.querySelector('a').href=safe;}

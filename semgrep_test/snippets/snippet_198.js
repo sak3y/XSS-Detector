@@ -1,1 +1,0 @@
-var hash=window.location.hash.substring(1);if(hash){var clean=hash.replace(/[^a-zA-Z0-9\s]/g,'');document.querySelector('h1').textContent='Search: '+clean;}

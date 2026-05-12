@@ -1,1 +1,0 @@
-function up_a(props){document.write('<div class=card>'+props.name+'</div>');}

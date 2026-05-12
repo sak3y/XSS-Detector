@@ -1,1 +1,0 @@
-function fp9(){const i=document.querySelector('#email');document.querySelector('#preview').textContent=i.value;}

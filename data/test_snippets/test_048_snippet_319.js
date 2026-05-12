@@ -1,0 +1,1 @@
+function ls5(){const name=localStorage.getItem('username')||'';document.querySelector('#welcome').textContent='Hi '+name;}

@@ -1,1 +1,0 @@
-function eh_a(){const m=location.hash.slice(1);document.write('<div class=err>'+m+'</div>');}

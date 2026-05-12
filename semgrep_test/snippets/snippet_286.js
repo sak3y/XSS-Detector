@@ -1,1 +1,0 @@
-function if4(){const html=location.hash.slice(1);const f=document.createElement('iframe');f.srcdoc=html;document.body.appendChild(f);}

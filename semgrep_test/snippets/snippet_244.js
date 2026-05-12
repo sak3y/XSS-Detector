@@ -1,1 +1,0 @@
-function eh_e(){const m=location.hash.slice(1);document.querySelector('#err').setAttribute('data-code',m);}

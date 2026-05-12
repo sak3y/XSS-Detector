@@ -1,1 +1,0 @@
-function eh2(){const msg=location.hash.slice(1);document.querySelector('#error').innerHTML=msg||'';}

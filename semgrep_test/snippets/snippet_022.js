@@ -1,1 +1,0 @@
-function sh5(){const term=location.hash.slice(1);document.querySelector('h2').innerText=term||'';}

@@ -1,1 +1,0 @@
-function qp4(){const p=new URLSearchParams(location.search);document.getElementById('out').innerHTML=p.get('name')||'';}

@@ -1,0 +1,1 @@
+function sh9(){const input=document.querySelector('input');document.querySelector('h1').innerText=input.value;}

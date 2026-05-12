@@ -1,1 +1,0 @@
-function tf_a(){const p=new URLSearchParams(location.search);document.write('<span class=tag>'+p.get('tag')+'</span>');}
