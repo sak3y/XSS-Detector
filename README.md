@@ -31,14 +31,13 @@ pip install semgrep
 Run Semgrep against the test set:
 
 ```bash
-semgrep --config xss.yml data/test_snippets/ --json --quiet > data/semgrep_output.json
+semgrep --config xss.yml data/test_snippets/ --json --quiet > data/semgrep_output.json 
+# config is written into the data folder
 ```
 
-Open the notebook and run cells in order:
+Open the notebook and run cells in order
 
-```bash
-jupyter notebook xss_detector.ipynb
-```
+
 
 The notebook prints the confusion matrices, F1 scores, and figures reported in Chapter 5. Total
 runtime is under two minutes on a laptop.
