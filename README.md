@@ -31,7 +31,7 @@ pip install semgrep
 Run Semgrep against the test set:
 
 ```bash
-semgrep --config xss.yml data/test_snippets/ --json --quiet > data/semgrep_output.json 
+semgrep --config xss.yml data/test_snippets/ --json --quiet | Out-File -FilePath data/semgrep_output.json -Encoding utf8
 # config is written into the data folder
 ```
 
