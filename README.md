@@ -22,8 +22,8 @@ Compared against a custom Semgrep configuration on a 250-snippet labelled datase
 Python 3.12 on macOS/Linux/WSL. Exact versions are pinned in `requirements.txt`.
 
 ```bash
-python -m venv venv
-source venv/bin/activate         # Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate         # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 pip install semgrep
 ```
