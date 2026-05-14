@@ -1,18 +1,28 @@
+# Custom XSS rules for the FYP test set.
+# Built against the OWASP DOM-based XSS Prevention Cheat Sheet.
+
+
 rules:
+  # ---- Direct HTML sinks ----
+
   - id: dom-xss-innerhtml-from-url
-    message: User input from URL flows into innerHTML/outerHTML — DOM XSS risk.
+    message:
+      innerHTML or outerHTML assignment with a non-literal value. DOM XSS risk if the right-hand
+      side derives from user input.
     severity: ERROR
     languages: [javascript]
     pattern-either:
       - pattern: $X.innerHTML = $Y
       - pattern: $X.outerHTML = $Y
       - pattern: $X.innerHTML += $Y
+    # exclude obviously hardcoded assignments. Does not exclude template
+    # literals — those still match and should match.
     pattern-not-inside:
       - pattern: $X.innerHTML = "..."
       - pattern: $X.innerHTML = '...'
 
   - id: dom-xss-document-write
-    message: document.write with potentially user-controlled data.
+    message: document.write / writeln writes raw HTML into the page.
     severity: ERROR
     languages: [javascript]
     pattern-either:
@@ -20,39 +30,53 @@ rules:
       - pattern: document.writeln(...)
 
   - id: dom-xss-insertadjacenthtml
-    message: insertAdjacentHTML with potentially user-controlled data.
+    message: insertAdjacentHTML inserts unsanitised HTML. Check the second argument.
     severity: ERROR
     languages: [javascript]
     pattern: $X.insertAdjacentHTML($POS, $Y)
 
+  # ---- Dynamic code execution ----
+
   - id: dom-xss-eval
-    message: eval() with dynamic input.
+    message: eval() runs its argument as JavaScript. Avoid.
     severity: ERROR
     languages: [javascript]
     pattern: eval(...)
 
   - id: dom-xss-function-constructor
-    message: Function() constructor with dynamic input.
+    message: new Function() compiles its string argument into runnable code.
     severity: ERROR
     languages: [javascript]
     pattern: new Function(...)
 
   - id: dom-xss-settimeout-string
-    message: setTimeout with string argument may execute attacker-controlled code.
+    # WARNING rather than ERROR. From the AST alone there is no reliable
+    # way to tell whether the first arg is a function reference (fine) or
+    # a string (not fine). The rule flags both, manual review filters.
+    message:
+      setTimeout / setInterval with a non-function first argument can execute attacker-controlled
+      code.
     severity: WARNING
     languages: [javascript]
     pattern-either:
       - pattern: setTimeout($X, ...)
       - pattern: setInterval($X, ...)
 
+  # ---- Frame and library sinks ----
+
   - id: dom-xss-iframe-srcdoc
-    message: iframe.srcdoc set from variable - XSS risk if user-controlled.
+    message:
+      iframe.srcdoc set from a variable. Treat the source as untrusted unless the value is
+      hardcoded.
     severity: ERROR
     languages: [javascript]
     pattern: $X.srcdoc = $Y
 
   - id: dom-xss-jquery-html
-    message: jQuery .html() with dynamic input.
+    # Added after the Python rule baseline missed a jQuery snippet
+    # (.html() is the jQuery equivalent of innerHTML but doesn't match
+    # a plain string check on "innerHTML").
+    message: jQuery .html() with a dynamic argument. Equivalent to innerHTML assignment.
     severity: ERROR
     languages: [javascript]
     pattern: $X.html($Y)
@@ -61,7 +85,12 @@ rules:
       - pattern: $X.html('...')
 
   - id: dom-xss-react-dangerously
-    message: React dangerouslySetInnerHTML — verify content is sanitised.
+    message:
+      dangerouslySetInnerHTML — confirm the value passes through DOMPurify or an equivalent
+      sanitiser.
     severity: WARNING
     languages: [javascript]
     pattern: dangerouslySetInnerHTML={...}
+
+# Not yet covered: javascript: URL sinks (location assignment, anchor href
+# rewrites).
