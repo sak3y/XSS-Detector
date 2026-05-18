@@ -19,24 +19,42 @@ Compared against a custom Semgrep configuration on a 250-snippet labelled datase
 
 ## Reproduction
 
-Python 3.12 on macOS/Linux/WSL. Exact versions are pinned in `requirements.txt`.
+Python 3.12. Exact versions are pinned in `requirements.txt`.
+
+### macOS / Linux
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate         # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-pip install semgrep
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install -r requirements.txt
+pip3 install semgrep
 ```
 
 Run Semgrep against the test set:
 
 ```bash
-semgrep --config xss.yml data/test_snippets/ --json --quiet | Out-File -FilePath data/semgrep_output.json -Encoding utf8
-# config is written into the data folder
+semgrep --config xss.yml data/test_snippets/ --json --quiet --output data/semgrep_output.json
+```
+
+### Windows
+
+Semgrep does not run natively on Windows, so use Docker for the Semgrep step. Everything else runs in plain PowerShell.
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+Run Semgrep via Docker (Docker Desktop must be running):
+
+```powershell
+docker run --rm -v "${PWD}:/src" returntocorp/semgrep `
+  semgrep --config /src/xss.yml /src/data/test_snippets/ `
+  --json --quiet --output /src/data/semgrep_output.json
 ```
 
 Open the notebook and run cells in order
-
 
 
 The notebook prints the confusion matrices, F1 scores, and figures reported in Chapter 5. Total
