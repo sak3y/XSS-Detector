@@ -1,5 +1,4 @@
-# Custom XSS rules for the FYP test set.
-# Built against the OWASP DOM-based XSS Prevention Cheat Sheet.
+# My custom XSS rules for the FYP test set.
 
 rules:
   # ---- Direct HTML sinks ----
